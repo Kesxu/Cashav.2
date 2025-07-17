@@ -1176,6 +1176,8 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
     <script>
         // DOM Elements - Dashboard
         const totalBalanceElement = document.getElementById('total-balance');
@@ -2292,6 +2294,20 @@
             if (autosaveToggleVisible && !autosaveToggleContainer.contains(e.target) && e.target !== autosaveToggleBtn) {
                 hideAutosaveToggle();
             }
+        });
+
+        // Your Firebase config here
+        const firebaseConfig = { /* ... */ };
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Save data
+        db.ref('messages').push({ text: "Hello, world!" });
+
+        // Load data
+        db.ref('messages').on('value', (snapshot) => {
+            const data = snapshot.val();
+            // Do something with data
         });
     </script>
 </body>
